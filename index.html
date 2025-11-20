@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Special Countdown 💖</title>
+    <title>Special Memories 💖</title>
     
-    <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* === CORE SETTINGS === */
+        /* === 1. CORE SETTINGS & NEW BACKGROUND === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at bottom, #0B1026 0%, #2B32B2 100%);
-            overflow: hidden; /* No scrollbars */
-            font-family: 'Jost', sans-serif;
+            /* Deep Romantic Night Gradient */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); 
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
             color: white;
         }
 
-        /* === INTERACTION LAYER (Fixed Audio Bug) === */
+        /* === 2. INTERACTION OVERLAY (CLICK TO START) === */
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: #000000;
+            background: rgba(0,0,0,0.95);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -36,225 +37,241 @@
             transition: opacity 1s ease-out;
         }
 
-        .overlay-text {
-            color: #ff4757;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: pulse 1.5s infinite;
-            border: 1px solid #ff4757;
-            padding: 15px 30px;
+        .btn-pulse {
+            background: #ff4757;
+            color: white;
+            padding: 15px 40px;
             border-radius: 50px;
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+            animation: pulse 1.5s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 71, 87, 0.8); } 100% { transform: scale(1); } }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); opacity: 0.7; } 100% { transform: scale(1); } }
-
-        /* === MOON DESIGN (Corrected & Beautiful) === */
-        .moon-wrapper {
+        /* === 3. PERFECT MOON (CORRECTED 🌙) === */
+        .moon-container {
             position: absolute;
-            top: 5%;
-            right: 10%;
+            top: 50px;
+            right: 50px;
             width: 100px;
             height: 100px;
+            animation: floatMoon 5s ease-in-out infinite alternate;
             z-index: 1;
-            animation: floatMoon 6s ease-in-out infinite alternate;
         }
-        
-        /* CSS Crescent Moon */
+
         .moon {
             width: 80px;
             height: 80px;
+            background-color: transparent;
             border-radius: 50%;
-            box-shadow: 15px -15px 0 0 #fffce6; /* Sharp Crescent */
-            transform: rotate(-10deg); /* Adjusted Angle */
-            filter: drop-shadow(0 0 10px rgba(255, 252, 230, 0.5));
+            /* Correct Crescent Shape */
+            box-shadow: 15px 0 0 0 #f6e58d; 
+            transform: rotate(-135deg); /* Rotated to look like a proper moon */
+            filter: drop-shadow(0 0 10px rgba(246, 229, 141, 0.6));
         }
-        
-        @keyframes floatMoon { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+        @keyframes floatMoon { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        /* === RESPONSIVE GLASS CONTAINER (Web View Fix) === */
+        /* === 4. GLASS CONTAINER (TIMER & TEXT) === */
         #content-box {
             position: absolute;
-            top: 50%;
+            top: 45%; /* Slightly higher */
             left: 50%;
-            transform: translate(-50%, -50%); /* True Center */
+            transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 500px; /* Perfect for Desktop */
+            max-width: 450px;
             z-index: 10;
-            pointer-events: none; /* Allow clicking canvas/stars */
+            text-align: center;
         }
 
         #glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* iOS Support */
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            opacity: 0; /* Fade in later */
-            transition: opacity 2s;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            padding: 40px 20px;
+            opacity: 0; 
+            transition: opacity 2s ease;
         }
 
-        /* === TEXT STYLES === */
         .main-title {
-            font-family: 'Parisienne', cursive;
-            font-size: 2.5rem;
-            color: #ff9ff3;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(255, 159, 243, 0.6);
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff7675;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .type-container {
-            min-height: 50px;
-            font-size: 1rem;
-            line-height: 1.5;
+        .typing-text {
+            font-size: 1.1rem;
+            min-height: 40px;
             color: #dfe6e9;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-weight: 300;
+            line-height: 1.6;
         }
-        
-        .cursor {
-            display: inline-block; width: 2px; height: 14px; background: white;
-            animation: blink 0.8s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
 
-        /* === TIMER STYLES (With Colon) === */
+        /* TIMER DESIGN */
         #timer {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 5px;
+            gap: 10px;
+        }
+        .time-box {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            width: 70px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .t-val { font-size: 1.5rem; font-weight: bold; display: block; color: #fff; }
+        .t-lbl { font-size: 0.7rem; text-transform: uppercase; color: #bbb; }
+
+        /* === 5. ANIMATED BACKGROUND STARS === */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--dur) infinite alternate;
+        }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+        /* SHOOTING STAR */
+        .shooting-star {
+            position: absolute;
+            width: 100px; height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+            animation: shoot 4s linear infinite;
+            opacity: 0;
+            transform: rotate(-45deg);
+        }
+        @keyframes shoot { 
+            0% { left: -10%; top: 50%; opacity: 1; } 
+            20% { left: 50%; top: -10%; opacity: 0; } 
+            100% { opacity: 0; } 
         }
 
-        .time-seg { display: flex; flex-direction: column; width: 60px; }
-        .t-val { font-size: 1.8rem; font-weight: 600; color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
-        .t-lbl { font-size: 0.7rem; text-transform: uppercase; color: #aaa; margin-top: 5px; letter-spacing: 1px; }
-        
-        .colon {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffffffaa;
-            padding-bottom: 20px; /* Alignment fix */
-            animation: blink 2s infinite;
-        }
-
-        /* === CANVAS & BACKGROUND STARS === */
+        /* === 6. TREE CANVAS === */
         canvas {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2; /* Tree Behind Text on mobile, careful adjustment needed */
+            z-index: 2; /* Tree sits nicely behind footer but implies depth */
+            pointer-events: none;
         }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: twinkle var(--dur) infinite alternate;
-        }
-        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Mobile Adjustment */
+        /* === 7. FOOTER MEMORIES === */
+        .footer-memories {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+            letter-spacing: 1px;
+            animation: glowText 3s infinite alternate;
+        }
+        @keyframes glowText { from { opacity: 0.6; } to { opacity: 1; text-shadow: 0 0 20px #ff7675; } }
+
+        /* MOBILE FIXES */
         @media (max-width: 768px) {
-            #content-box { top: 40%; } /* Move Text up on mobile so tree has space */
-            .moon-wrapper { width: 60px; height: 60px; top: 30px; right: 20px; }
-            .moon { width: 50px; height: 50px; box-shadow: 10px -10px 0 0 #fffce6; }
-            .main-title { font-size: 2rem; }
-            .t-val { font-size: 1.5rem; }
-            .colon { font-size: 1.5rem; }
+            .main-title { font-size: 2.5rem; }
+            .moon-container { width: 60px; height: 60px; top: 20px; right: 20px; }
+            .moon { width: 50px; height: 50px; box-shadow: 10px 0 0 0 #f6e58d; }
+            #content-box { top: 40%; } /* Move text up */
         }
 
     </style>
 </head>
 <body>
 
-    <!-- 1. INTERACTION LAYER -->
+    <!-- OVERLAY -->
     <div id="overlay">
-        <div class="overlay-text">Tap to Start Magic ✨</div>
+        <div class="btn-pulse">Tap to Open 💖</div>
+        <div style="color:#bbb; margin-top:10px; font-size:0.9rem;">Audio Enabled</div>
     </div>
 
-    <!-- 2. BACKGROUND VISUALS -->
+    <!-- BACKGROUND ELEMENTS -->
     <div id="stars-container"></div>
-    <div class="moon-wrapper"><div class="moon"></div></div>
+    <div class="shooting-star" style="top: 30%; left: -20%; animation-delay: 2s;"></div>
+    
+    <!-- MOON -->
+    <div class="moon-container">
+        <div class="moon"></div>
+    </div>
 
-    <!-- 3. TREE CANVAS -->
+    <!-- TREE CANVAS -->
     <canvas id="treeCanvas"></canvas>
 
-    <!-- 4. GLASS UI & TEXT -->
+    <!-- CENTER CONTENT -->
     <div id="content-box">
         <div id="glass-panel">
-            <div class="main-title" id="headline"></div>
-            <div class="type-container" id="typing-area"></div>
-
+            <div class="main-title">Countdown Begins</div>
+            <div class="typing-text" id="typewriter"></div>
+            
             <div id="timer">
-                <!-- Injected by JS -->
+                <!-- Timer JS loads here -->
             </div>
         </div>
     </div>
 
-    <!-- 5. HIDDEN YOUTUBE PLAYER -->
+    <!-- FOOTER -->
+    <div class="footer-memories">Memories 13 December</div>
+
+    <!-- YOUTUBE AUDIO -->
     <div id="yt-player" style="display: none;"></div>
 
-    <!-- === LOGIC SCRIPT === -->
+    <!-- SCRIPTS -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        
-        // --- CONFIG ---
-        const DATE_TARGET = "December 13, 2025 00:00:00";
-        const TEXT_CONTENT = "Coming Soon Special Day.\nUntil 13 Dec 2025, \nEvery heartbeat counts for you.";
-        const SONG_ID = "nAw2ooeubSQ"; // The song you requested
+        // --- CONFIGURATION ---
+        const TARGET_DATE = "December 13, 2025 00:00:00";
+        const TYPING_MSG = "Every second brings me closer to you.\nWaiting for the special day...";
+        const YOUTUBE_ID = "nAw2ooeubSQ"; // Your song
 
-        // --- VARIABLES ---
+        // --- 1. AUDIO & START ---
         let player;
-        let isPlaying = false;
-        let canvas, ctx, width, height;
-        let tick = 0;
-        
-        // --- 1. AUDIO CONTROLLER (High IQ Fix) ---
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                height: '0', width: '0',
-                videoId: SONG_ID,
-                playerVars: {
-                    'autoplay': 0, 'controls': 0, 'rel': 0, 'loop': 1, 'playlist': SONG_ID
-                }
+                height: '0', width: '0', videoId: YOUTUBE_ID,
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': YOUTUBE_ID }
             });
         }
 
         document.getElementById('overlay').addEventListener('click', function() {
-            // Fade out overlay
             this.style.opacity = '0';
             setTimeout(() => { this.style.display = 'none'; }, 1000);
-
-            // Start everything
-            if (player && player.playVideo) {
+            
+            // Play Audio
+            if(player && player.playVideo) {
                 player.playVideo();
-                player.unMute(); // Ensure sound
+                player.unMute();
                 player.setVolume(100);
             }
-            
-            initVisuals(); // Start Tree
-            setTimeout(startTextAnimation, 500); // Start Typing
-            document.getElementById('glass-panel').style.opacity = '1'; // Show box
+
+            // Show Content
+            document.getElementById('glass-panel').style.opacity = '1';
+            startTyping();
+            initTree(); // Draw Tree
         });
 
-
-        // --- 2. REAL TIME TIMER WITH COLON (Best Design) ---
+        // --- 2. TIMER LOGIC ---
         function updateTimer() {
             const now = new Date().getTime();
-            const target = new Date(DATE_TARGET).getTime();
+            const target = new Date(TARGET_DATE).getTime();
             const diff = target - now;
 
             if (diff < 0) {
-                document.getElementById('headline').innerText = "Happy Birthday! 🎂";
-                document.getElementById('timer').innerHTML = "<h3 style='color:#fff'>Today is Your Day!</h3>";
+                document.getElementById('timer').innerHTML = "<h3 style='color:#fff'>Happy Birthday! 🎂</h3>";
                 return;
             }
 
@@ -263,163 +280,113 @@
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-            // Format with leading zeros
-            const fd = d < 10 ? "0"+d : d;
-            const fh = h < 10 ? "0"+h : h;
-            const fm = m < 10 ? "0"+m : m;
-            const fs = s < 10 ? "0"+s : s;
-
-            const col = `<div class="colon">:</div>`;
-
             document.getElementById('timer').innerHTML = `
-                <div class="time-seg"><span class="t-val">${fd}</span><span class="t-lbl">Days</span></div> ${col}
-                <div class="time-seg"><span class="t-val">${fh}</span><span class="t-lbl">Hrs</span></div> ${col}
-                <div class="time-seg"><span class="t-val">${fm}</span><span class="t-lbl">Mins</span></div> ${col}
-                <div class="time-seg"><span class="t-val">${fs}</span><span class="t-lbl">Secs</span></div>
+                <div class="time-box"><span class="t-val">${d}</span><span class="t-lbl">Days</span></div>
+                <div class="time-box"><span class="t-val">${h}</span><span class="t-lbl">Hrs</span></div>
+                <div class="time-box"><span class="t-val">${m}</span><span class="t-lbl">Min</span></div>
+                <div class="time-box"><span class="t-val">${s}</span><span class="t-lbl">Sec</span></div>
             `;
         }
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // --- 3. TEXT ANIMATION ---
-        const headline = document.getElementById('headline');
-        const typingArea = document.getElementById('typing-area');
-        
-        // Simple Fade for Headline
-        headline.innerText = "Loading Love...";
-        
-        function startTextAnimation() {
-            headline.innerText = "Coming Soon...";
-            const lines = TEXT_CONTENT.split('\n');
-            let lineIdx = 0;
-            let charIdx = 0;
-
-            function typeWriter() {
-                if (lineIdx < lines.length) {
-                    let currentLine = lines[lineIdx];
-                    if (charIdx < currentLine.length) {
-                        typingArea.innerHTML += currentLine.charAt(charIdx);
-                        charIdx++;
-                        setTimeout(typeWriter, 60);
-                    } else {
-                        typingArea.innerHTML += "<br>";
-                        lineIdx++;
-                        charIdx = 0;
-                        setTimeout(typeWriter, 300);
-                    }
-                } else {
-                     typingArea.innerHTML += "<span class='cursor'></span>";
+        // --- 3. TYPING EFFECT ---
+        function startTyping() {
+            const el = document.getElementById('typewriter');
+            let i = 0;
+            const txt = TYPING_MSG;
+            
+            function type() {
+                if (i < txt.length) {
+                    el.innerHTML += txt.charAt(i) === '\n' ? '<br>' : txt.charAt(i);
+                    i++;
+                    setTimeout(type, 80);
                 }
             }
-            typeWriter();
+            type();
         }
 
+        // --- 4. STARS BACKGROUND ---
+        const starsContainer = document.getElementById('stars-container');
+        for(let i=0; i<150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            const size = Math.random() * 3;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.setProperty('--dur', (Math.random() * 2 + 1) + 's');
+            starsContainer.appendChild(star);
+        }
 
-        // --- 4. CANVAS VISUALS (TREE + BACKGROUND) ---
-        function initVisuals() {
+        // --- 5. IMPROVED TREE (BETTER LOOK) ---
+        let canvas, ctx, w, h;
+        let tick = 0;
+
+        function initTree() {
             canvas = document.getElementById('treeCanvas');
             ctx = canvas.getContext('2d');
             resize();
             window.addEventListener('resize', resize);
-
-            // Create Stars Background
-            const starContainer = document.getElementById('stars-container');
-            for(let i=0; i<100; i++){
-                let d = document.createElement('div');
-                d.className = 'star';
-                d.style.left = Math.random()*100 + '%';
-                d.style.top = Math.random()*80 + '%'; // Keep bottom clean
-                d.style.width = Math.random()*3 + 'px';
-                d.style.height = d.style.width;
-                d.style.setProperty('--dur', (Math.random()*2+1)+'s');
-                starContainer.appendChild(d);
-            }
-            
-            animate();
+            animateTree();
         }
 
         function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        // --- FRACTAL HEART TREE LOGIC ---
-        // Tree Color & Love Color
-        const TRUNK_RGB = "101, 67, 33"; 
-        
-        function drawHeart(x, y, size, angle, color) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(angle);
-            ctx.beginPath();
-            // Improved Heart Path
-            let topCurve = size * 0.3;
-            ctx.moveTo(0, topCurve);
-            ctx.bezierCurveTo(0, 0, -size/2, 0, -size/2, topCurve);
-            ctx.bezierCurveTo(-size/2, (size+topCurve)/2, 0, size*0.9, 0, size);
-            ctx.bezierCurveTo(0, size*0.9, size/2, (size+topCurve)/2, size/2, topCurve);
-            ctx.bezierCurveTo(size/2, 0, 0, 0, 0, topCurve);
-            
-            ctx.fillStyle = color;
-            ctx.shadowColor = color;
-            ctx.shadowBlur = 5;
-            ctx.fill();
-            ctx.restore();
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
         }
 
         function drawBranch(x, y, len, angle, width, depth) {
-            ctx.beginPath();
             ctx.save();
-            ctx.strokeStyle = `rgba(${TRUNK_RGB}, 1)`;
-            ctx.lineWidth = width;
-            ctx.lineCap = "round";
             ctx.translate(x, y);
-            ctx.rotate(angle * Math.PI/180);
+            ctx.rotate(angle * Math.PI / 180);
+            
+            // Trunk Gradient
+            ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(0, -len);
+            ctx.strokeStyle = depth > 8 ? "#4a3b2a" : "#6D4C41"; // Darker trunk
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
             ctx.stroke();
 
-            // Sway Logic (Wind)
-            let wind = Math.sin(tick * 0.02 + depth) * 0.5;
+            // Wind Sway
+            let sway = Math.sin(tick * 0.02 + depth) * 0.5;
 
-            // Leaf/Heart Rendering at the end of branches
-            if (len < 10 || depth < 1) {
-                 let pulse = 1 + 0.2 * Math.sin(tick * 0.05 + x); // Pulse Effect
-                 drawHeart(0, -len, 10 * pulse, 0, "#ff6b81");
-                 if(depth < 1 && Math.random() > 0.95) {
-                     // Occasional floating particles logic could go here
-                 }
-                 ctx.restore();
-                 return;
+            if (len < 12 || depth < 1) {
+                // Draw Glowing Heart Leaves
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(255, 118, 117, ${Math.random()*0.5 + 0.5})`; // Pink Glow
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "#ff7675";
+                ctx.arc(0, -len, Math.random() * 4 + 2, 0, Math.PI * 2); // Soft Circle/Heart feel
+                ctx.fill();
+                ctx.restore();
+                return;
             }
 
             ctx.translate(0, -len);
-
-            // Recursive Branches (Binary Split)
-            let nextLen = len * 0.75;
-            let nextWidth = width * 0.7;
-            let spread = 20 + wind; // Branch Angle spread + wind
-
-            drawBranch(0, 0, nextLen, spread, nextWidth, depth - 1);
-            drawBranch(0, 0, nextLen, -spread, nextWidth, depth - 1);
-
+            
+            // Branching
+            drawBranch(0, 0, len * 0.75, 25 + sway, width * 0.7, depth - 1);
+            drawBranch(0, 0, len * 0.75, -25 + sway, width * 0.7, depth - 1);
+            
             ctx.restore();
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+        function animateTree() {
+            ctx.clearRect(0, 0, w, h);
             tick++;
-
-            // Responsive Position
-            // PC: Bottom Right. Mobile: Bottom Center
-            let startX = width > 700 ? width * 0.85 : width * 0.5; 
-            let startY = height;
-            let baseLen = width > 700 ? 120 : 80; // Smaller tree on mobile
-
-            // Draw the tree (11 iterations deep)
-            drawBranch(startX, startY, baseLen, 0, 14, 10);
-
-            requestAnimationFrame(animate);
+            
+            // Tree Position (Right side on PC, Center on Mobile)
+            let startX = w > 800 ? w * 0.85 : w * 0.5;
+            let startY = h;
+            
+            // Draw
+            drawBranch(startX, startY, w > 800 ? 130 : 90, 0, 12, 10);
+            
+            requestAnimationFrame(animateTree);
         }
 
     </script>
