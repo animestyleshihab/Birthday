@@ -5,324 +5,303 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Memories: 13 Dec</title>
     
-    <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Super Premium Fonts (Cute & Romantic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* === 1. RESET & BACKGROUND === */
+        /* === 1. PREMIUM UNIVERSE BACKGROUND === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
-            /* Premium Deep Night Gradient */
-            background: radial-gradient(circle at top right, #1a2a6c, #b21f1f, #fdbb2d); /* Fallback */
-            background: linear-gradient(to bottom, #020024 0%, #090979 35%, #00d4ff 100%); /* Just kidding, let's use deep night */
-            background: linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             overflow: hidden;
-            font-family: 'Jost', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            font-family: 'Quicksand', sans-serif;
             color: white;
         }
 
-        /* === 2. INTERACTION OVERLAY (MUST CLICK FOR SONG) === */
+        /* === 2. INTERACTION LAYER (TAP TO START) === */
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.95);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.8s ease-out;
-            backdrop-filter: blur(5px);
+            transition: opacity 1s ease;
         }
 
-        .start-btn {
+        .magic-btn {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border: none;
             padding: 15px 40px;
-            border: 2px solid #ff9ff3;
             border-radius: 50px;
-            color: #ff9ff3;
+            color: #fff;
             font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: pulseBtn 1.5s infinite;
-            box-shadow: 0 0 20px rgba(255, 159, 243, 0.4);
+            font-family: 'Parisienne', cursive;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 154, 158, 0.6);
+            animation: heartbeat 1.5s infinite;
         }
+        @keyframes heartbeat { 0% { transform: scale(1); } 15% { transform: scale(1.1); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(255, 159, 243, 0.6); } 100% { transform: scale(1); } }
-
-        /* === 3. THE REAL MOON (FIXED ORIENTATION) === */
-        .moon-wrapper {
+        /* === 3. REAL MOON (PERFECT ORIENTATION 🌙) === */
+        /* This creates a perfect crescent moon using SVG for accuracy */
+        .moon-container {
             position: absolute;
-            top: 8%;
-            right: 8%;
+            top: 50px;
+            right: 40px;
             width: 80px;
             height: 80px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 200, 0.6));
+            animation: floatMoon 4s ease-in-out infinite alternate;
             z-index: 1;
-            animation: hoverMoon 6s infinite ease-in-out alternate;
+        }
+        
+        /* Using SVG ensures the shape is never "ulta" */
+        .moon-svg {
+            width: 100%;
+            height: 100%;
+            fill: #fdf6e3;
         }
 
-        .moon {
-            width: 80px;
-            height: 80px;
+        @keyframes floatMoon { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
+        /* === 4. STARS (TWINKLING) === */
+        #stars-container {
+            position: absolute;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
             border-radius: 50%;
-            /* This creates a sharp crescent on the Right Side 🌒 */
-            box-shadow: 15px -2px 0 0 #f6e58d; 
-            transform: rotate(15deg); /* Slight tilt for natural look */
-            filter: drop-shadow(0 0 15px rgba(246, 229, 141, 0.5));
+            opacity: 0.8;
+            animation: twinkle var(--dur) infinite alternate;
         }
-        @keyframes hoverMoon { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 4px white; } }
 
-        /* === 4. GLASS CONTENT BOX (HIGH ANIMATION) === */
+        /* === 5. GLASS CARD (ADJUSTED POSITION) === */
         #content-box {
             position: absolute;
-            /* Centering Logic */
-            top: 40%; 
+            top: 35%; /* Adjusted higher so tree doesn't overlap on mobile */
             left: 50%;
             transform: translate(-50%, -50%);
-            
-            width: 85%;
-            max-width: 500px;
-            text-align: center;
+            width: 90%;
+            max-width: 480px;
             z-index: 10;
+            text-align: center;
         }
 
-        #glass-panel {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(12px);
+        #glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 20px;
-            padding: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease;
+            transition: opacity 1.5s ease;
         }
 
-        .headline {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            background: linear-gradient(to right, #ff9ff3, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 5px rgba(255, 159, 243, 0.5));
+        .title {
+            font-family: 'Parisienne', cursive;
+            font-size: 2.8rem;
+            color: #ff9a9e;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
-        .typing-area {
+        .message {
             font-size: 1.1rem;
-            color: #eee;
-            min-height: 60px;
-            margin-bottom: 20px;
-            font-weight: 300;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             line-height: 1.6;
+            margin-bottom: 20px;
+            min-height: 50px;
+            color: #f1f2f6;
         }
 
-        /* Timer High Quality */
+        /* TIMER */
         #timer {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
         }
-        .t-box {
-            display: flex; flex-direction: column;
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 8px;
-            min-width: 60px;
+        .t-part {
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            border-radius: 10px;
+            min-width: 65px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        .t-num { font-size: 1.5rem; font-weight: 700; color: white; }
-        .t-label { font-size: 0.7rem; text-transform: uppercase; color: #ccc; margin-top: 2px; }
+        .t-num { display: block; font-size: 1.4rem; font-weight: 700; }
+        .t-txt { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
 
-        /* === 5. FOOTER (FIXED) === */
+        /* === 6. FOOTER (MEMORIES) === */
         .footer {
             position: fixed;
             bottom: 15px;
             width: 100%;
             text-align: center;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Parisienne', cursive;
             font-size: 1.8rem;
             color: rgba(255, 255, 255, 0.8);
             z-index: 20;
-            text-shadow: 0 0 10px #ff9ff3;
-            letter-spacing: 1px;
+            text-shadow: 0 0 10px #ff9a9e;
+            animation: glow 2s infinite alternate;
         }
+        @keyframes glow { from { text-shadow: 0 0 5px #ff9a9e; } to { text-shadow: 0 0 20px #ff9a9e; } }
 
-        /* === 6. CANVAS (TREE) === */
+        /* === 7. CANVAS (TREE) === */
         canvas {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
+            z-index: 5; /* Behind text box if they overlap, but clearly visible */
             pointer-events: none;
         }
 
-        /* === 7. STARS & SHOOTING STARS === */
-        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--dur) infinite alternate; }
-        @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 1; box-shadow: 0 0 5px white; } }
-
-        /* MOBILE ADJUSTMENTS (Web View Optimized) */
+        /* MOBILE FIXES */
         @media (max-width: 768px) {
-            .moon-wrapper { width: 60px; height: 60px; top: 20px; right: 20px; }
-            .moon { width: 50px; height: 50px; box-shadow: 12px -2px 0 0 #f6e58d; }
-            #content-box { top: 35%; width: 90%; } /* Text Higher so Tree fits below */
-            .headline { font-size: 2.5rem; }
-            .t-num { font-size: 1.2rem; }
-            .footer { font-size: 1.5rem; bottom: 10px; }
+            .moon-container { width: 60px; height: 60px; top: 20px; right: 20px; }
+            .title { font-size: 2.4rem; }
+            #content-box { top: 32%; } /* Text goes UP */
+            /* Tree will be drawn smaller via JS for mobile */
         }
 
     </style>
 </head>
 <body>
 
-    <!-- AUDIO OVERLAY -->
+    <!-- OVERLAY -->
     <div id="overlay">
-        <div class="start-btn">Tap for Magic ✨</div>
-        <div style="margin-top:15px; color:#aaa; font-size:0.8rem;">Sound On 🔊</div>
+        <button class="magic-btn">Tap to Open ❤️</button>
     </div>
 
-    <!-- BACKGROUND -->
+    <!-- STARS -->
     <div id="stars-container"></div>
-    
-    <!-- MOON -->
-    <div class="moon-wrapper"><div class="moon"></div></div>
 
-    <!-- TREE -->
+    <!-- MOON (SVG FOR PERFECT SHAPE) -->
+    <div class="moon-container">
+        <svg class="moon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+        </svg>
+    </div>
+
+    <!-- TREE CANVAS -->
     <canvas id="treeCanvas"></canvas>
 
     <!-- CONTENT -->
     <div id="content-box">
-        <div id="glass-panel">
-            <h1 class="headline">Special Countdown</h1>
-            <div class="typing-area" id="typing-text"></div>
-            
-            <div id="timer">
-                <!-- JS Injected -->
-            </div>
+        <div id="glass">
+            <h1 class="title">Special Countdown</h1>
+            <div class="message" id="typing-box"></div>
+            <div id="timer"></div>
         </div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">Memories 13 December</div>
 
-    <!-- YOUTUBE PLAYER HIDDEN -->
-    <div id="yt-player" style="display: none;"></div>
+    <!-- AUDIO -->
+    <div id="yt-player" style="display:none;"></div>
 
-    <!-- LOGIC -->
+    <!-- SCRIPTS -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
 
-        // CONFIG
-        const TARGET_DATE = "December 13, 2025 00:00:00";
-        const SONG_ID = "nAw2ooeubSQ"; 
-        const MESSAGE = "Until the stars align on that day,\nI am counting every heartbeat for you.";
+        // --- CONFIG ---
+        const TARGET = "December 13, 2025 00:00:00";
+        const SONG_ID = "nAw2ooeubSQ";
+        const MSG = "Until the stars align on 13th Dec,\nMy heart beats only for you...";
 
-        // 1. YOUTUBE API
+        // --- 1. AUDIO SETUP ---
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                height: '0', width: '0', videoId: SONG_ID,
-                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': SONG_ID }
+                videoId: SONG_ID,
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': SONG_ID }
             });
         }
 
-        // 2. START SEQUENCE
-        document.getElementById('overlay').addEventListener('click', function() {
-            // Fade out overlay
-            this.style.opacity = '0';
-            setTimeout(() => { this.style.display = 'none'; }, 800);
-
-            // Play Audio
+        document.querySelector('.magic-btn').addEventListener('click', () => {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('overlay').style.display = 'none', 1000);
+            
             if(player && player.playVideo) {
                 player.playVideo();
                 player.unMute();
-                player.setVolume(100);
             }
 
-            // Show UI
-            const panel = document.getElementById('glass-panel');
-            panel.style.opacity = '1';
-            panel.style.transform = 'translateY(0)';
-
-            // Start Animations
-            setTimeout(startTyping, 500);
-            initTree();
+            document.getElementById('glass').style.opacity = '1';
+            initVisuals();
+            startTyping();
         });
 
-        // 3. TIMER
-        function updateTimer() {
-            const now = new Date().getTime();
-            const target = new Date(TARGET_DATE).getTime();
-            const diff = target - now;
-
-            if (diff < 0) {
-                document.getElementById('timer').innerHTML = "<h3>Today is the Day! ❤️</h3>";
+        // --- 2. TIMER ---
+        function timer() {
+            const diff = new Date(TARGET) - new Date();
+            const el = document.getElementById('timer');
+            
+            if(diff < 0) {
+                el.innerHTML = "<h3>Today is the Day! 🎂</h3>";
                 return;
             }
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            const d = Math.floor(diff / (1000*60*60*24));
+            const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+            const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+            const s = Math.floor((diff % (1000*60)) / 1000);
 
-            document.getElementById('timer').innerHTML = `
-                <div class="t-box"><span class="t-num">${d}</span><span class="t-label">Days</span></div>
-                <div class="t-box"><span class="t-num">${h}</span><span class="t-label">Hrs</span></div>
-                <div class="t-box"><span class="t-num">${m}</span><span class="t-label">Min</span></div>
-                <div class="t-box"><span class="t-num">${s}</span><span class="t-label">Sec</span></div>
+            el.innerHTML = `
+                <div class="t-part"><span class="t-num">${d}</span><span class="t-txt">Days</span></div>
+                <div class="t-part"><span class="t-num">${h}</span><span class="t-txt">Hrs</span></div>
+                <div class="t-part"><span class="t-num">${m}</span><span class="t-txt">Min</span></div>
+                <div class="t-part"><span class="t-num">${s}</span><span class="t-txt">Sec</span></div>
             `;
         }
-        setInterval(updateTimer, 1000);
-        updateTimer();
+        setInterval(timer, 1000);
+        timer();
 
-        // 4. TYPING ANIMATION (High Quality)
+        // --- 3. TYPING ---
         function startTyping() {
-            const el = document.getElementById('typing-text');
-            const text = MESSAGE;
-            let index = 0;
-            
-            el.innerHTML = ""; 
-            
+            const box = document.getElementById('typing-box');
+            let i = 0;
+            box.innerHTML = "";
             function type() {
-                if(index < text.length) {
-                    let char = text.charAt(index);
-                    if(char === "\n") char = "<br>";
-                    el.innerHTML += char;
-                    index++;
-                    setTimeout(type, 50); // Typing speed
-                } else {
-                    el.innerHTML += "<span style='animation:blink 1s infinite'>|</span>";
+                if(i < MSG.length) {
+                    box.innerHTML += MSG.charAt(i) === '\n' ? '<br>' : MSG.charAt(i);
+                    i++;
+                    setTimeout(type, 70);
                 }
             }
             type();
         }
 
-        // 5. STARS
-        const sc = document.getElementById('stars-container');
-        for(let i=0; i<100; i++){
-            let s = document.createElement('div');
-            s.className = 'star';
-            s.style.left = Math.random()*100+'%';
-            s.style.top = Math.random()*100+'%';
-            let size = Math.random()*3;
-            s.style.width = size+'px'; s.style.height = size+'px';
-            s.style.setProperty('--dur', (Math.random()*2+1)+'s');
-            sc.appendChild(s);
-        }
-
-        // 6. ROMANTIC TREE (Responsive Adjusted)
+        // --- 4. VISUALS (STARS + TREE) ---
         let canvas, ctx, w, h, tick = 0;
-        
-        function initTree() {
+
+        function initVisuals() {
+            // Create Stars
+            const sc = document.getElementById('stars-container');
+            for(let i=0; i<200; i++) { // 200 Stars requested
+                let s = document.createElement('div');
+                s.className = 'star';
+                s.style.left = Math.random()*100 + '%';
+                s.style.top = Math.random()*100 + '%';
+                let size = Math.random()*2.5;
+                s.style.width = size+'px'; s.style.height = size+'px';
+                s.style.setProperty('--dur', (Math.random()*2+1)+'s');
+                sc.appendChild(s);
+            }
+
+            // Setup Canvas
             canvas = document.getElementById('treeCanvas');
             ctx = canvas.getContext('2d');
             window.addEventListener('resize', resize);
@@ -335,35 +314,51 @@
             h = canvas.height = window.innerHeight;
         }
 
+        // --- HEART SHAPE DRAWING FUNCTION ---
+        function drawHeart(x, y, size, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.beginPath();
+            // Bezier Heart
+            ctx.moveTo(0, 0);
+            ctx.bezierCurveTo(-size/2, -size/2, -size, size/3, 0, size);
+            ctx.bezierCurveTo(size, size/3, size/2, -size/2, 0, 0);
+            
+            ctx.fillStyle = color;
+            ctx.shadowColor = "#ff4757";
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            ctx.restore();
+        }
+
         function drawBranch(x, y, len, angle, width, depth) {
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(angle * Math.PI/180);
             
+            // Draw Wood
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(0, -len);
-            ctx.strokeStyle = `rgba(255, 200, 200, ${depth/10 + 0.2})`; // Glowing white/pink trunk
+            ctx.strokeStyle = `rgba(255, 220, 220, ${depth/10 + 0.1})`; // White/Pink trunk
             ctx.lineWidth = width;
             ctx.lineCap = "round";
             ctx.stroke();
 
-            // Wind effect
-            let sway = Math.sin(tick * 0.03 + depth) * 0.5;
+            // Wind
+            let sway = Math.sin(tick * 0.02 + depth) * 0.6;
 
-            if(len < 10 || depth < 1) {
-                // Heart/Flower at end
-                ctx.beginPath();
-                ctx.fillStyle = "#ff6b81";
-                ctx.shadowColor = "#ff4757";
-                ctx.shadowBlur = 10;
-                ctx.arc(0, -len, Math.random()*3+2, 0, Math.PI*2);
-                ctx.fill();
+            // LEAVES = HEARTS ❤️
+            if(len < 12 || depth < 1) {
+                let pulse = 1 + 0.1 * Math.sin(tick * 0.05 + x);
+                // Call the Heart Function instead of circle
+                drawHeart(0, -len, 12 * pulse, "#ff6b81"); 
                 ctx.restore();
                 return;
             }
 
             ctx.translate(0, -len);
+            // Branching
             drawBranch(0, 0, len*0.75, 25+sway, width*0.7, depth-1);
             drawBranch(0, 0, len*0.75, -25+sway, width*0.7, depth-1);
             ctx.restore();
@@ -373,13 +368,11 @@
             ctx.clearRect(0, 0, w, h);
             tick++;
             
-            // Responsive Tree Position
-            // PC: Right corner. Mobile: Bottom Center.
+            // Logic: PC = Right side, Mobile = Bottom Center (but small)
             let startX = w > 800 ? w * 0.85 : w * 0.5;
-            let startY = h;
-            let size = w > 800 ? 120 : 90;
+            let size = w > 800 ? 120 : 85; // Smaller on mobile so it fits
 
-            drawBranch(startX, startY, size, 0, 12, 10);
+            drawBranch(startX, h, size, 0, 12, 10);
             requestAnimationFrame(animate);
         }
 
