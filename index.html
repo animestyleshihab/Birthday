@@ -5,252 +5,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Memories: 13 Dec</title>
     
-    <!-- Super Premium Fonts (Cute & Romantic) -->
-    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Premium Romantic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* === 1. PREMIUM UNIVERSE BACKGROUND === */
+        /* === 1. DEEP PREMIUM BACKGROUND === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            font-family: 'Quicksand', sans-serif;
+            /* Very Deep Night Sky Gradient */
+            background: linear-gradient(to bottom, #000000 0%, #050511 40%, #0f0c29 100%);
+            font-family: 'Jost', sans-serif;
             color: white;
         }
 
-        /* === 2. INTERACTION LAYER (TAP TO START) === */
+        /* === 2. SMOOTH OVERLAY === */
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.95);
+            background: #000;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease;
+            transition: opacity 1.5s ease-out;
         }
 
-        .magic-btn {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            border: none;
-            padding: 15px 40px;
+        .start-btn {
+            padding: 15px 45px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 50px;
             color: #fff;
-            font-size: 1.5rem;
-            font-family: 'Parisienne', cursive;
+            font-family: 'Jost', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 154, 158, 0.6);
-            animation: heartbeat 1.5s infinite;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            animation: pulseBtn 2s infinite;
         }
-        @keyframes heartbeat { 0% { transform: scale(1); } 15% { transform: scale(1.1); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes pulseBtn { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 50px rgba(255, 105, 180, 0.4); } 100% { transform: scale(1); opacity: 0.8; } }
 
-        /* === 3. REAL MOON (PERFECT ORIENTATION 🌙) === */
-        /* This creates a perfect crescent moon using SVG for accuracy */
-        .moon-container {
-            position: absolute;
-            top: 50px;
-            right: 40px;
-            width: 80px;
-            height: 80px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 200, 0.6));
-            animation: floatMoon 4s ease-in-out infinite alternate;
-            z-index: 1;
-        }
+        /* === 3. STARS & SHOOTING STARS === */
+        #stars-container { position: absolute; width: 100%; height: 100%; z-index: 0; }
         
-        /* Using SVG ensures the shape is never "ulta" */
-        .moon-svg {
-            width: 100%;
-            height: 100%;
-            fill: #fdf6e3;
-        }
-
-        @keyframes floatMoon { from { transform: translateY(0); } to { transform: translateY(-10px); } }
-
-        /* === 4. STARS (TWINKLING) === */
-        #stars-container {
-            position: absolute;
-            width: 100%; height: 100%;
-            z-index: 0;
-        }
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
-            animation: twinkle var(--dur) infinite alternate;
+            animation: twinkle var(--dur) infinite ease-in-out alternate;
         }
-        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 4px white; } }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px white; } }
 
-        /* === 5. GLASS CARD (ADJUSTED POSITION) === */
+        /* === 4. MOON (SVG - FIXED & BEAUTIFUL) === */
+        .moon-container {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            width: 90px;
+            height: 90px;
+            z-index: 1;
+            animation: floatMoon 6s ease-in-out infinite alternate;
+        }
+        /* A perfect crescent using SVG path */
+        .moon-svg { width: 100%; height: 100%; fill: #fdf6e3; filter: drop-shadow(0 0 15px rgba(253, 246, 227, 0.4)); }
+        @keyframes floatMoon { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+
+        /* === 5. GLASS CARD (WEB VIEW OPTIMIZED) === */
         #content-box {
             position: absolute;
-            top: 35%; /* Adjusted higher so tree doesn't overlap on mobile */
+            top: 40%; /* Standard Position */
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 480px;
+            max-width: 500px;
             z-index: 10;
             text-align: center;
         }
 
         #glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.03); /* Ultra minimal glass */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
             opacity: 0;
-            transition: opacity 1.5s ease;
+            transform: translateY(30px);
+            transition: all 1.5s ease;
         }
 
         .title {
             font-family: 'Parisienne', cursive;
-            font-size: 2.8rem;
-            color: #ff9a9e;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            font-size: 3rem;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(255, 154, 158, 0.3));
         }
 
-        .message {
+        .typing-area {
             font-size: 1.1rem;
+            color: #dcdcdc;
+            font-weight: 300;
+            min-height: 60px;
+            margin-bottom: 25px;
             line-height: 1.6;
-            margin-bottom: 20px;
-            min-height: 50px;
-            color: #f1f2f6;
         }
 
-        /* TIMER */
-        #timer {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
+        /* === TIMER === */
+        #timer { display: flex; justify-content: center; gap: 15px; }
+        .t-unit {
+            display: flex; flex-direction: column;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 12px;
+            width: 70px;
+            border: 1px solid rgba(255,255,255,0.08);
         }
-        .t-part {
-            background: rgba(0,0,0,0.3);
-            padding: 8px;
-            border-radius: 10px;
-            min-width: 65px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .t-num { display: block; font-size: 1.4rem; font-weight: 700; }
-        .t-txt { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+        .t-val { font-size: 1.6rem; font-weight: 600; color: #fff; }
+        .t-lbl { font-size: 0.7rem; text-transform: uppercase; color: #aaa; margin-top: 5px; }
 
-        /* === 6. FOOTER (MEMORIES) === */
+        /* === 6. CANVAS (HEART TREE) === */
+        canvas {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* === 7. FOOTER === */
         .footer {
             position: fixed;
-            bottom: 15px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
             font-family: 'Parisienne', cursive;
             font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.6);
             z-index: 20;
-            text-shadow: 0 0 10px #ff9a9e;
-            animation: glow 2s infinite alternate;
+            animation: glowText 3s infinite alternate;
         }
-        @keyframes glow { from { text-shadow: 0 0 5px #ff9a9e; } to { text-shadow: 0 0 20px #ff9a9e; } }
+        @keyframes glowText { from { text-shadow: 0 0 5px #ff9a9e; opacity: 0.7; } to { text-shadow: 0 0 15px #ff9a9e; opacity: 1; } }
 
-        /* === 7. CANVAS (TREE) === */
-        canvas {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5; /* Behind text box if they overlap, but clearly visible */
-            pointer-events: none;
-        }
-
-        /* MOBILE FIXES */
+        /* === MOBILE OPTIMIZATION === */
         @media (max-width: 768px) {
-            .moon-container { width: 60px; height: 60px; top: 20px; right: 20px; }
-            .title { font-size: 2.4rem; }
-            #content-box { top: 32%; } /* Text goes UP */
-            /* Tree will be drawn smaller via JS for mobile */
+            #content-box { top: 30%; } /* Move Text Up */
+            .moon-container { width: 70px; height: 70px; top: 20px; right: 20px; }
+            .title { font-size: 2.5rem; }
+            /* Tree will be drawn smaller and at bottom */
         }
-
     </style>
 </head>
 <body>
 
-    <!-- OVERLAY -->
+    <!-- 1. INTERACTION OVERLAY -->
     <div id="overlay">
-        <button class="magic-btn">Tap to Open ❤️</button>
+        <div class="start-btn">Start Magic ✨</div>
     </div>
 
-    <!-- STARS -->
+    <!-- 2. DEEP BACKGROUND ELEMENTS -->
     <div id="stars-container"></div>
-
-    <!-- MOON (SVG FOR PERFECT SHAPE) -->
+    
+    <!-- 3. REAL MOON SVG -->
     <div class="moon-container">
-        <svg class="moon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+        <svg class="moon-svg" viewBox="0 0 24 24">
+            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
         </svg>
     </div>
 
-    <!-- TREE CANVAS -->
+    <!-- 4. TREE CANVAS -->
     <canvas id="treeCanvas"></canvas>
 
-    <!-- CONTENT -->
+    <!-- 5. GLASS CONTENT -->
     <div id="content-box">
         <div id="glass">
-            <h1 class="title">Special Countdown</h1>
-            <div class="message" id="typing-box"></div>
+            <h1 class="title">The Special Day</h1>
+            <div class="typing-area" id="typing-text"></div>
             <div id="timer"></div>
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- 6. FOOTER -->
     <div class="footer">Memories 13 December</div>
 
-    <!-- AUDIO -->
+    <!-- 7. AUDIO PLAYER -->
     <div id="yt-player" style="display:none;"></div>
 
-    <!-- SCRIPTS -->
+    <!-- LOGIC -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
 
-        // --- CONFIG ---
-        const TARGET = "December 13, 2025 00:00:00";
-        const SONG_ID = "nAw2ooeubSQ";
-        const MSG = "Until the stars align on 13th Dec,\nMy heart beats only for you...";
+        // === CONFIGURATION ===
+        const TARGET_DATE = "December 13, 2025 00:00:00";
+        const SONG_ID = "nAw2ooeubSQ"; // Correct ID
+        const MESSAGE = "Until the moon whispers the date,\nI am waiting for you, every single second.";
 
-        // --- 1. AUDIO SETUP ---
+        // === 1. AUDIO SETUP ===
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
                 videoId: SONG_ID,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': SONG_ID }
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': SONG_ID, 'controls': 0 }
             });
         }
 
-        document.querySelector('.magic-btn').addEventListener('click', () => {
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('overlay').style.display = 'none', 1000);
-            
+        // === 2. START SEQUENCE ===
+        document.querySelector('.start-btn').addEventListener('click', () => {
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 1500);
+
+            // Audio
             if(player && player.playVideo) {
                 player.playVideo();
                 player.unMute();
+                player.setVolume(100);
             }
 
+            // Visuals
             document.getElementById('glass').style.opacity = '1';
+            document.getElementById('glass').style.transform = 'translateY(0)';
+            
+            setTimeout(startTyping, 800);
             initVisuals();
-            startTyping();
         });
 
-        // --- 2. TIMER ---
-        function timer() {
-            const diff = new Date(TARGET) - new Date();
+        // === 3. TIMER ===
+        function updateTimer() {
+            const diff = new Date(TARGET_DATE) - new Date();
             const el = document.getElementById('timer');
-            
+
             if(diff < 0) {
-                el.innerHTML = "<h3>Today is the Day! 🎂</h3>";
+                el.innerHTML = "<h3>Happy Birthday! ❤️</h3>";
                 return;
             }
 
@@ -260,48 +255,50 @@
             const s = Math.floor((diff % (1000*60)) / 1000);
 
             el.innerHTML = `
-                <div class="t-part"><span class="t-num">${d}</span><span class="t-txt">Days</span></div>
-                <div class="t-part"><span class="t-num">${h}</span><span class="t-txt">Hrs</span></div>
-                <div class="t-part"><span class="t-num">${m}</span><span class="t-txt">Min</span></div>
-                <div class="t-part"><span class="t-num">${s}</span><span class="t-txt">Sec</span></div>
+                <div class="t-unit"><span class="t-val">${d}</span><span class="t-lbl">Days</span></div>
+                <div class="t-unit"><span class="t-val">${h}</span><span class="t-lbl">Hrs</span></div>
+                <div class="t-unit"><span class="t-val">${m}</span><span class="t-lbl">Min</span></div>
+                <div class="t-unit"><span class="t-val">${s}</span><span class="t-lbl">Sec</span></div>
             `;
         }
-        setInterval(timer, 1000);
-        timer();
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
-        // --- 3. TYPING ---
+        // === 4. SMOOTH TYPING ===
         function startTyping() {
-            const box = document.getElementById('typing-box');
+            const box = document.getElementById('typing-text');
             let i = 0;
             box.innerHTML = "";
+            
             function type() {
-                if(i < MSG.length) {
-                    box.innerHTML += MSG.charAt(i) === '\n' ? '<br>' : MSG.charAt(i);
+                if(i < MESSAGE.length) {
+                    const char = MESSAGE.charAt(i);
+                    box.innerHTML += char === '\n' ? '<br>' : char;
                     i++;
-                    setTimeout(type, 70);
+                    setTimeout(type, 60); // Smooth speed
                 }
             }
             type();
         }
 
-        // --- 4. VISUALS (STARS + TREE) ---
+        // === 5. VISUALS (STARS + TREE) ===
         let canvas, ctx, w, h, tick = 0;
 
         function initVisuals() {
-            // Create Stars
+            // Stars
             const sc = document.getElementById('stars-container');
-            for(let i=0; i<200; i++) { // 200 Stars requested
-                let s = document.createElement('div');
+            for(let i=0; i<180; i++) {
+                const s = document.createElement('div');
                 s.className = 'star';
                 s.style.left = Math.random()*100 + '%';
                 s.style.top = Math.random()*100 + '%';
-                let size = Math.random()*2.5;
+                const size = Math.random()*2.5;
                 s.style.width = size+'px'; s.style.height = size+'px';
-                s.style.setProperty('--dur', (Math.random()*2+1)+'s');
+                s.style.setProperty('--dur', (Math.random()*2+1.5)+'s'); // Slower twinkle
                 sc.appendChild(s);
             }
 
-            // Setup Canvas
+            // Canvas
             canvas = document.getElementById('treeCanvas');
             ctx = canvas.getContext('2d');
             window.addEventListener('resize', resize);
@@ -314,53 +311,50 @@
             h = canvas.height = window.innerHeight;
         }
 
-        // --- HEART SHAPE DRAWING FUNCTION ---
-        function drawHeart(x, y, size, color) {
+        // Heart Draw Function
+        function drawHeart(x, y, size) {
             ctx.save();
             ctx.translate(x, y);
             ctx.beginPath();
-            // Bezier Heart
             ctx.moveTo(0, 0);
             ctx.bezierCurveTo(-size/2, -size/2, -size, size/3, 0, size);
             ctx.bezierCurveTo(size, size/3, size/2, -size/2, 0, 0);
-            
-            ctx.fillStyle = color;
+            ctx.fillStyle = "#ff6b81"; // Pink Heart
             ctx.shadowColor = "#ff4757";
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = 15;
             ctx.fill();
             ctx.restore();
         }
 
+        // Recursive Branch
         function drawBranch(x, y, len, angle, width, depth) {
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(angle * Math.PI/180);
             
-            // Draw Wood
+            // Trunk
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(0, -len);
-            ctx.strokeStyle = `rgba(255, 220, 220, ${depth/10 + 0.1})`; // White/Pink trunk
+            ctx.strokeStyle = `rgba(200, 180, 200, ${depth/10})`; // Fading trunk
             ctx.lineWidth = width;
             ctx.lineCap = "round";
             ctx.stroke();
 
-            // Wind
-            let sway = Math.sin(tick * 0.02 + depth) * 0.6;
+            // Smooth Sway Calculation
+            const sway = Math.sin(tick * 0.015 + depth) * 0.8; // Slower, deeper sway
 
-            // LEAVES = HEARTS ❤️
             if(len < 12 || depth < 1) {
-                let pulse = 1 + 0.1 * Math.sin(tick * 0.05 + x);
-                // Call the Heart Function instead of circle
-                drawHeart(0, -len, 12 * pulse, "#ff6b81"); 
+                // Leaf (Heart)
+                const pulse = 1 + 0.15 * Math.sin(tick * 0.03 + x);
+                drawHeart(0, -len, 11 * pulse);
                 ctx.restore();
                 return;
             }
 
             ctx.translate(0, -len);
-            // Branching
-            drawBranch(0, 0, len*0.75, 25+sway, width*0.7, depth-1);
-            drawBranch(0, 0, len*0.75, -25+sway, width*0.7, depth-1);
+            drawBranch(0, 0, len*0.75, 25 + sway, width*0.7, depth-1);
+            drawBranch(0, 0, len*0.75, -25 + sway, width*0.7, depth-1);
             ctx.restore();
         }
 
@@ -368,11 +362,11 @@
             ctx.clearRect(0, 0, w, h);
             tick++;
             
-            // Logic: PC = Right side, Mobile = Bottom Center (but small)
+            // Logic: PC = Right, Mobile = Bottom Center
             let startX = w > 800 ? w * 0.85 : w * 0.5;
-            let size = w > 800 ? 120 : 85; // Smaller on mobile so it fits
+            let size = w > 800 ? 125 : 90;
 
-            drawBranch(startX, h, size, 0, 12, 10);
+            drawBranch(startX, h, size, 0, 13, 10);
             requestAnimationFrame(animate);
         }
 
