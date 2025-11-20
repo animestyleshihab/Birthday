@@ -6,318 +6,281 @@
     <title>Memories: 13 Dec</title>
     
     <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
     <style>
-        /* === 1. EXTREME PREMIUM DEEP BACKGROUND === */
+        /* === 1. PERFORMANCE OPTIMIZED BACKGROUND === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: black; /* Base */
-            background: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%); /* Deep Galaxy */
-            font-family: 'Cinzel', serif;
+            background-color: #000;
+            /* Deep Gradient - Optimized */
+            background: radial-gradient(circle at bottom, #1B1464 0%, #000000 70%);
+            font-family: 'Poppins', sans-serif;
             color: white;
         }
 
-        /* === 2. MAGIC OVERLAY (REQUIRED FOR AUDIO) === */
+        /* === 2. CLICK LAYER (MANDATORY FOR AUDIO) === */
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.95);
-            z-index: 99999;
+            background: #000;
+            z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: opacity 0.8s ease-out;
+            transition: opacity 0.8s;
         }
 
-        /* High Animation Pulse Button */
-        .magic-btn {
-            font-size: 2rem;
-            color: #ff7675;
+        .play-btn {
+            padding: 20px 50px;
             border: 2px solid #ff7675;
-            padding: 20px 60px;
             border-radius: 50px;
+            font-size: 1.5rem;
+            color: #fff;
+            background: rgba(255, 118, 117, 0.1);
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 118, 117, 0.4);
+            animation: pulse 1.2s infinite alternate;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            box-shadow: 0 0 50px rgba(255, 118, 117, 0.5);
-            animation: intensePulse 1s infinite alternate;
+            letter-spacing: 2px;
         }
-        @keyframes intensePulse { from { transform: scale(1); box-shadow: 0 0 20px #ff7675; } to { transform: scale(1.1); box-shadow: 0 0 60px #ff7675; } }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); box-shadow: 0 0 50px #ff7675; } }
 
-        /* === 3. HIGH SMOOTH ANIMATIONS (STARS) === */
-        #stars-container { position: absolute; width: 100%; height: 100%; z-index: 0; }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: fastTwinkle var(--dur) infinite alternate;
-        }
-        @keyframes fastTwinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 8px white; } }
-
-        /* === 4. MOON (PERFECT 🌙) === */
+        /* === 3. VISUALS === */
+        #stars { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        
+        /* SVG MOON (Never Ulta) */
         .moon-box {
             position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 90px;
-            height: 90px;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 220, 0.5));
-            animation: floatHigh 3s ease-in-out infinite alternate;
+            top: 5%; right: 8%;
+            width: 80px; height: 80px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 200, 0.3));
             z-index: 1;
         }
-        /* SVG ensures it is NEVER ulta */
-        .moon-svg { width: 100%; height: 100%; fill: #fcf0c8; }
-        @keyframes floatHigh { from { transform: translateY(0); } to { transform: translateY(-20px); } }
+        .moon-svg { width: 100%; height: 100%; fill: #f6e58d; }
 
-        /* === 5. GLASS CONTENT (HIGH QUALITY) === */
-        #content-box {
+        /* === 4. GLASS TEXT CARD (NO LAG) === */
+        #content {
             position: absolute;
-            top: 40%;
-            left: 50%;
+            top: 40%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 550px;
-            z-index: 10;
+            width: 90%; max-width: 500px;
             text-align: center;
-            perspective: 1000px;
+            z-index: 10;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 1s ease;
         }
 
-        #glass {
+        .glass-panel {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px); /* High blur for premium feel */
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(8px); /* Lower blur for less lag */
         }
 
         .title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            background: linear-gradient(to bottom, #fff, #ff9a9e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 154, 158, 0.5));
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff9ff3;
+            text-shadow: 0 0 10px rgba(255, 159, 243, 0.5);
+            margin-bottom: 10px;
         }
 
         .typing {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            line-height: 1.8;
             min-height: 60px;
-            color: #e0e0e0;
-            text-shadow: 0 2px 4px black;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #eee;
+            margin-bottom: 20px;
         }
-        
-        .cursor { display: inline-block; width: 2px; height: 1.2em; background: #ff7675; animation: blink 0.5s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
 
-        /* === TIMER (PREMIUM) === */
-        #timer { display: flex; justify-content: center; gap: 15px; }
-        .t-card {
-            background: rgba(0,0,0,0.4);
-            padding: 15px;
-            border-radius: 15px;
-            min-width: 70px;
+        /* TIMER */
+        #timer { display: flex; justify-content: center; gap: 10px; }
+        .t-box {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 65px;
             border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .t-num { display: block; font-size: 1.8rem; font-weight: bold; color: #fff; }
-        .t-lbl { font-size: 0.7rem; letter-spacing: 1px; color: #aaa; }
+        .t-val { font-size: 1.5rem; font-weight: 700; display: block; }
+        .t-lbl { font-size: 0.7rem; opacity: 0.7; text-transform: uppercase; }
 
-        /* === 6. FOOTER === */
+        /* FOOTER */
         .footer {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.7);
-            z-index: 20;
-            text-shadow: 0 0 15px #ff9a9e;
-            animation: glow 2s infinite alternate;
+            position: fixed; bottom: 20px; width: 100%; text-align: center;
+            font-family: 'Dancing Script', cursive; font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            animation: glow 2s infinite;
         }
-        @keyframes glow { from { opacity: 0.6; } to { opacity: 1; text-shadow: 0 0 25px #ff7675; } }
+        @keyframes glow { 50% { opacity: 1; text-shadow: 0 0 15px white; } }
 
-        /* === 7. CANVAS TREE === */
-        canvas { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+        /* CANVAS TREE */
+        canvas { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
 
-        /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) {
-            #content-box { top: 35%; }
-            .moon-box { width: 70px; height: 70px; top: 20px; right: 20px; }
-            .title { font-size: 2.8rem; }
-            .t-num { font-size: 1.4rem; }
+            #content { top: 35%; }
+            .moon-box { width: 60px; height: 60px; }
+            .title { font-size: 2.5rem; }
         }
+
     </style>
 </head>
 <body>
 
-    <!-- 1. OVERLAY (Tap Anywhere) -->
+    <!-- TAP TO UNLOCK AUDIO (Essential) -->
     <div id="overlay">
-        <div class="magic-btn">Tap to Start ❤️</div>
+        <div class="play-btn">Tap to Unlock ❤️</div>
+        <p style="margin-top:15px; color:#aaa; font-size:0.8rem;">Enable Music & Magic</p>
     </div>
 
-    <!-- 2. VISUALS -->
-    <div id="stars-container"></div>
-    
-    <!-- MOON SVG (Correct) -->
+    <!-- BACKGROUND -->
+    <div id="stars"></div>
+
+    <!-- SVG MOON -->
     <div class="moon-box">
         <svg class="moon-svg" viewBox="0 0 24 24">
-            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
+            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
         </svg>
     </div>
 
+    <!-- TREE -->
     <canvas id="treeCanvas"></canvas>
 
-    <!-- 3. CENTER TEXT -->
-    <div id="content-box">
-        <div id="glass">
-            <h1 class="title">The Special Countdown</h1>
-            <div class="typing" id="typing-area"></div>
+    <!-- TEXT CONTENT -->
+    <div id="content">
+        <div class="glass-panel">
+            <h1 class="title">Special Countdown</h1>
+            <div class="typing" id="type-text"></div>
             <div id="timer"></div>
         </div>
     </div>
 
-    <!-- 4. FOOTER -->
+    <!-- FOOTER -->
     <div class="footer">Memories 13 December</div>
 
-    <!-- 5. HIDDEN YOUTUBE PLAYER -->
+    <!-- YOUTUBE API -->
     <div id="yt-player" style="display:none;"></div>
 
-    <!-- SCRIPTS -->
+    <!-- LOGIC -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         
-        // === CONFIG ===
+        // CONFIG
         const TARGET = "December 13, 2025 00:00:00";
-        const SONG = "nAw2ooeubSQ";
-        const TEXT = "Until the stars align on 13th Dec,\nEvery heartbeat belongs only to you.";
+        const SONG_ID = "nAw2ooeubSQ"; 
+        const MSG = "Until the stars align on 13th Dec,\nEvery heartbeat is just for you.";
 
-        // === 1. AUDIO LOGIC (FORCE PLAY) ===
+        // 1. SETUP AUDIO
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                videoId: SONG,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': SONG, 'controls': 0 }
+                videoId: SONG_ID,
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': SONG_ID }
             });
         }
 
-        // ONE CLICK TO RULE THEM ALL
+        // 2. CLICK TO START (Fixes Audio & Lag)
         document.getElementById('overlay').addEventListener('click', function() {
-            const overlay = this;
-            overlay.style.opacity = '0';
-            setTimeout(() => overlay.style.display = 'none', 800);
-
-            // Force Audio
+            // Play Audio Immediately
             if(player && player.playVideo) {
                 player.playVideo();
                 player.unMute();
                 player.setVolume(100);
             }
 
-            // Start High Quality Animations
-            document.getElementById('glass').style.opacity = '1';
-            document.getElementById('glass').style.transform = 'translateY(0)';
-            
-            initVisuals();
-            setTimeout(startTyping, 500);
+            // Hide Overlay
+            this.style.opacity = '0';
+            setTimeout(() => this.style.display = 'none', 800);
+
+            // Start Visuals
+            document.getElementById('content').style.opacity = '1';
+            createStars();
+            startTyping();
+            initTree();
         });
 
-        // === 2. TIMER ===
+        // 3. OPTIMIZED STARS (CSS based, less JS load)
+        function createStars() {
+            const container = document.getElementById('stars');
+            for(let i=0; i<100; i++) { // Reduced count for performance
+                let s = document.createElement('div');
+                s.style.position = 'absolute';
+                s.style.left = Math.random()*100+'%';
+                s.style.top = Math.random()*100+'%';
+                s.style.width = Math.random()*2+'px';
+                s.style.height = s.style.width;
+                s.style.background = 'white';
+                s.style.borderRadius = '50%';
+                s.style.opacity = Math.random();
+                s.style.animation = `pulse ${Math.random()*2+1}s infinite alternate`;
+                container.appendChild(s);
+            }
+        }
+
+        // 4. TYPING EFFECT
+        function startTyping() {
+            const el = document.getElementById('type-text');
+            let i = 0;
+            function type() {
+                if(i < MSG.length) {
+                    el.innerHTML += MSG.charAt(i) === '\n' ? '<br>' : MSG.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        // 5. TIMER
         function updateTimer() {
             const diff = new Date(TARGET) - new Date();
-            const el = document.getElementById('timer');
-
-            if(diff < 0) {
-                el.innerHTML = "<h2>Happy Birthday! 🎂</h2>"; return;
-            }
+            if(diff < 0) { document.getElementById('timer').innerHTML = "<h3>Happy Birthday!</h3>"; return; }
             
             const d = Math.floor(diff / (1000*60*60*24));
             const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
             const m = Math.floor((diff % (1000*60*60)) / (1000*60));
             const s = Math.floor((diff % (1000*60)) / 1000);
 
-            el.innerHTML = `
-                <div class="t-card"><span class="t-num">${d}</span><span class="t-lbl">Days</span></div>
-                <div class="t-card"><span class="t-num">${h}</span><span class="t-lbl">Hrs</span></div>
-                <div class="t-card"><span class="t-num">${m}</span><span class="t-lbl">Min</span></div>
-                <div class="t-card"><span class="t-num">${s}</span><span class="t-lbl">Sec</span></div>
+            document.getElementById('timer').innerHTML = `
+                <div class="t-box"><span class="t-val">${d}</span><span class="t-lbl">Days</span></div>
+                <div class="t-box"><span class="t-val">${h}</span><span class="t-lbl">Hrs</span></div>
+                <div class="t-box"><span class="t-val">${m}</span><span class="t-lbl">Min</span></div>
+                <div class="t-box"><span class="t-val">${s}</span><span class="t-lbl">Sec</span></div>
             `;
         }
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // === 3. HIGH SPEED TYPING ANIMATION ===
-        function startTyping() {
-            const box = document.getElementById('typing-area');
-            let i = 0;
-            box.innerHTML = '<span class="cursor"></span>';
-            
-            function type() {
-                if(i < TEXT.length) {
-                    let char = TEXT.charAt(i);
-                    if(char === '\n') char = '<br>';
-                    // Insert before cursor
-                    box.innerHTML = box.innerHTML.replace('<span class="cursor"></span>', char + '<span class="cursor"></span>');
-                    i++;
-                    setTimeout(type, 50); // Fast Typing (High Animation)
-                }
-            }
-            type();
-        }
-
-        // === 4. PREMIUM VISUALS (STARS + TREE) ===
+        // 6. OPTIMIZED TREE (ZERO LAG VERSION)
         let canvas, ctx, w, h, tick = 0;
 
-        function initVisuals() {
-            // 300 Stars for Deep Galaxy
-            const sc = document.getElementById('stars-container');
-            for(let i=0; i<300; i++){
-                let s = document.createElement('div');
-                s.className = 'star';
-                s.style.left = Math.random()*100+'%';
-                s.style.top = Math.random()*100+'%';
-                let sz = Math.random()*3;
-                s.style.width = sz+'px'; s.style.height = sz+'px';
-                s.style.setProperty('--dur', (Math.random()*1 + 0.5)+'s'); // Fast Twinkle
-                sc.appendChild(s);
-            }
-
+        function initTree() {
             canvas = document.getElementById('treeCanvas');
             ctx = canvas.getContext('2d');
-            window.addEventListener('resize', resize);
             resize();
+            window.addEventListener('resize', resize);
             animate();
         }
 
-        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
 
-        function drawHeart(x, y, size) {
-            ctx.save();
-            ctx.translate(x, y);
+        function drawHeart(x, y, r) {
             ctx.fillStyle = "#ff6b81";
-            ctx.shadowColor = "#ff4757";
-            ctx.shadowBlur = 15;
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.bezierCurveTo(-size/2, -size/2, -size, size/3, 0, size);
-            ctx.bezierCurveTo(size, size/3, size/2, -size/2, 0, 0);
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x-r/2, y-r/2, x-r, y+r/3, x, y+r);
+            ctx.bezierCurveTo(x+r, y+r/3, x+r/2, y-r/2, x, y);
             ctx.fill();
-            ctx.restore();
         }
 
         function drawBranch(x, y, len, angle, width, depth) {
@@ -325,31 +288,28 @@
             ctx.translate(x, y);
             ctx.rotate(angle * Math.PI/180);
             
+            // Simplified Branch Drawing (Faster)
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(0, -len);
-            // Gradient Trunk
-            let grd = ctx.createLinearGradient(0,0,0,-len);
-            grd.addColorStop(0, "rgba(100, 80, 80, 1)");
-            grd.addColorStop(1, "rgba(255, 200, 200, 1)");
-            ctx.strokeStyle = grd;
+            ctx.strokeStyle = `rgba(255,200,200,${depth/10})`;
             ctx.lineWidth = width;
-            ctx.lineCap = "round";
             ctx.stroke();
 
-            // HIGH SMOOTH ANIMATION MATH
-            let sway = Math.sin(tick * 0.03 + depth) * 0.8; // Faster & Smoother Sway
+            // Optimized Sway
+            let sway = Math.sin(tick * 0.02 + depth) * 0.5;
 
-            if(len < 10 || depth < 1) {
-                let pulse = 1 + 0.2 * Math.sin(tick * 0.08 + x); // Fast Heartbeat Pulse
-                drawHeart(0, -len, 10 * pulse);
+            if (len < 10 || depth < 1) {
+                // Draw Heart Leaf
+                drawHeart(0, -len, 10);
                 ctx.restore();
                 return;
             }
 
             ctx.translate(0, -len);
-            drawBranch(0, 0, len*0.75, 22 + sway, width*0.7, depth-1);
-            drawBranch(0, 0, len*0.75, -22 + sway, width*0.7, depth-1);
+            // Recursive calls
+            drawBranch(0, 0, len*0.75, 20+sway, width*0.7, depth-1);
+            drawBranch(0, 0, len*0.75, -20+sway, width*0.7, depth-1);
             ctx.restore();
         }
 
@@ -358,11 +318,14 @@
             tick++;
             
             let startX = w > 800 ? w * 0.85 : w * 0.5;
-            let size = w > 800 ? 130 : 90;
+            // Reduce depth on mobile to prevent LAG
+            let depth = w > 800 ? 10 : 8; 
+            let size = w > 800 ? 120 : 90;
 
-            drawBranch(startX, h, size, 0, 14, 10);
+            drawBranch(startX, h, size, 0, 10, depth);
             requestAnimationFrame(animate);
         }
+
     </script>
 </body>
 </html>
